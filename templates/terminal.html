@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>{{ .Site.Title }} | Terminal Profile</title>
+      <style>
+         :root {
+         --bg: #1e1e1e;
+         --bar: #181818;
+         --text: #d4d4d4;
+         --muted: #8b949e;
+         --accent: #73c991; /* subtle green */
+         --border: #2d2d2d;
+         }
+         * {
+         box-sizing: border-box;
+         }
+         body {
+         background: var(--bg);
+         margin: 0px;
+         padding: 0px;
+         color: var(--text);
+         font-family:
+         "JetBrains Mono",
+         "Fira Code",
+         "Cascadia Code",
+         monospace;
+         }
+         header {
+         background: var(--bar);
+         border-bottom: 1px solid var(--border);
+         height: 32px;
+         padding: 0 20px;
+         font-size: 13px;
+         }
+         .prompt {
+         color: var(--text);
+         text-shadow: 0 0 5px rgba(0, 255, 65, 0.4);
+         }
+         .cursor {
+         display: inline-block;
+         width: 9px;
+         height: 17px;
+         margin-left: 4px;
+         background: var(--accent);
+         box-shadow: 0 0 8px var(--accent);
+         animation: terminalBlink 1.2s infinite steps(1);
+         margin-top: 4px;
+         position: relative;
+         top: 3px;
+         }
+         @keyframes terminalBlink {
+         0%, 60% {
+         opacity: 1;
+         }
+         61%, 100% {
+         opacity: 0;
+         }
+         }
+         nav {
+         display: flex;
+         align-items: center;
+         gap: 28px;
+         }
+         nav a,
+         nav span {
+         color: var(--text);
+         text-decoration: none;
+         }
+         nav a:hover {
+         color: #ffffff;
+         }
+         main {
+         min-height: calc(100vh - 62px);
+         display: grid;
+         place-items: center;
+         text-align: center;
+         padding: 40px 20px;
+         }
+         .profile {
+         transform: translateY(-120px);
+         }
+         .avatar {
+         width: 150px;
+         height: 150px;
+         border-radius: 50%;
+         object-fit: cover;
+         margin-bottom: 34px;
+         }
+         h1 {
+         color: var(--text);
+         text-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+         }
+         .role {
+         margin: 16px 0 20px;  
+         font-size: 16px;
+         color: var(--muted);
+         }
+         .socials a,
+         nav a {
+         color: var(--muted);
+         }
+         .socials a:hover,
+         nav a:hover {
+         color: var(--link);
+         text-shadow: 0 0 8px rgba(57, 255, 20, 0.8);
+         }
+         @media (max-width: 640px) {
+         header {
+         padding: 0 20px;
+         font-size: 13px;
+         }
+         nav {
+         gap: 14px;
+         }
+         .avatar {
+         width: 125px;
+         height: 125px;
+         }
+         }
+      </style>
+   </head>
+   <body>
+      <header>
+         <div class="prompt">
+            {{ initials .Site.Title }}@site → /home<span class="cursor"></span>
+         </div>
+      </header>
+      <main>
+         <section class="profile">
+            {{ if .Site.Avatar.Name }}
+            <img class="avatar" src="/static/{{ .Site.Avatar.Name }}" alt="Profile photo" />
+            {{ else }}
+            <img class="avatar" src="{{ .Site.Avatar.Url }}" alt="Profile photo" />
+            {{ end }}
+            <h1>{{ .Site.Title }}</h1>
+            <p class="role">{{ .Site.SubTitle }}</p>
+            <p class="bio">{{ .Site.Description }}</p>
+            <nav class="socials" aria-label="Profile links">
+               {{ range .Links }}
+               <a href="{{ .Url }}" target="_blank" rel="noreferrer" title="{{ .Name }}">
+               {{ .Name }}
+               </a>
+               {{ end }}
+            </nav>
+         </section>
+      </main>
+   </body>
+</html>

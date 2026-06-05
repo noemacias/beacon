@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>{{ .Site.Title }} | Profile</title>
+      <style>
+         :root {
+         --bg: #080b0d;
+         --panel: #0f1418;
+         --card: #13191e;
+         --text: #f4f4f2;
+         --muted: #9ca3aa;
+         --line: rgba(255, 255, 255, 0.09);
+         --shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
+         --radius: 18px;
+         }
+         * {
+         box-sizing: border-box;
+         }
+         body {
+         margin: 0;
+         min-height: 100vh;
+         font-family:
+         Inter,
+         ui-sans-serif,
+         system-ui,
+         -apple-system,
+         BlinkMacSystemFont,
+         "Segoe UI",
+         sans-serif;
+         color: var(--text);
+         background:
+         radial-gradient(
+         circle at top,
+         rgba(255, 255, 255, 0.08) 0,
+         transparent 32%
+         ),
+         linear-gradient(135deg, #07090b, #10161b 55%, #07090b);
+         display: grid;
+         place-items: center;
+         padding: 32px;
+         }
+         .page {
+         width: min(100%, 760px);
+         min-height: 680px;
+         background: rgba(15, 20, 24, 0.82);
+         border: 1px solid var(--line);
+         border-radius: 28px;
+         box-shadow: var(--shadow);
+         padding: 34px;
+         position: relative;
+         overflow: hidden;
+         }
+         .page::before {
+         content: "";
+         position: absolute;
+         inset: -1px;
+         background: radial-gradient(
+         circle at 50% 0%,
+         rgba(255, 255, 255, 0.08),
+         transparent 35%
+         );
+         pointer-events: none;
+         }
+         .topbar,
+         main,
+         footer {
+         position: relative;
+         }
+         .topbar {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         font-size: 14px;
+         font-weight: 700;
+         letter-spacing: 0.02em;
+         }
+         .theme-icon {
+         width: 34px;
+         height: 34px;
+         border-radius: 50%;
+         border: 1px solid var(--line);
+         display: grid;
+         place-items: center;
+         color: var(--muted);
+         background: rgba(255, 255, 255, 0.03);
+         }
+         main {
+         width: min(100%, 430px);
+         margin: 0 auto;
+         padding-top: 32px;
+         text-align: center;
+         }
+         .avatar {
+         width: 160px;
+         height: 160px;
+         border-radius: 50%;
+         object-fit: cover;
+         border: 3px solid rgba(255, 255, 255, 0.12);
+         box-shadow: 0 12px 34px rgba(0, 0, 0, 0.36);
+         }
+         h1 {
+         margin: 18px 0 4px;
+         font-size: clamp(28px, 4vw, 36px);
+         line-height: 1;
+         letter-spacing: -0.04em;
+         }
+         .role {
+         margin: 0;
+         color: var(--muted);
+         font-size: 16px;
+         }
+         .bio {
+         color: #c3c8cd;
+         font-size: 14px;
+         line-height: 1.6;
+         max-width: 390px;
+         margin: 18px auto 28px;
+         }
+         .links {
+         display: grid;
+         gap: 10px;
+         text-align: left;
+         }
+         .link-card {
+         display: grid;
+         grid-template-columns: 34px 1fr 22px;
+         gap: 14px;
+         align-items: center;
+         min-height: 58px;
+         padding: 12px 14px;
+         color: inherit;
+         text-decoration: none;
+         background: rgba(255, 255, 255, 0.035);
+         border: 1px solid var(--line);
+         border-radius: 14px;
+         transition:
+         transform 0.18s ease,
+         border-color 0.18s ease,
+         background 0.18s ease;
+         }
+         .link-card:hover {
+         transform: translateY(-2px);
+         border-color: rgba(255, 255, 255, 0.18);
+         background: rgba(255, 255, 255, 0.06);
+         }
+         .icon {
+         width: 34px;
+         height: 34px;
+         border-radius: 10px;
+         display: grid;
+         place-items: center;
+         background: rgba(255, 255, 255, 0.075);
+         font-weight: 800;
+         font-size: 15px;
+         }
+         .link-card strong {
+         display: block;
+         font-size: 14px;
+         margin-bottom: 2px;
+         }
+         .link-card span {
+         display: block;
+         color: var(--muted);
+         font-size: 12px;
+         }
+         .arrow {
+         color: var(--muted);
+         font-size: 22px;
+         }
+         footer {
+         position: absolute;
+         left: 34px;
+         right: 34px;
+         bottom: 28px;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         gap: 18px;
+         color: var(--muted);
+         font-size: 12px;
+         }
+         .socials {
+         display: flex;
+         gap: 18px;
+         }
+         .socials a {
+         color: var(--muted);
+         text-decoration: none;
+         font-weight: 700;
+         }
+         .socials a:hover {
+         color: var(--text);
+         }
+         @media (max-width: 560px) {
+         body {
+         padding: 16px;
+         }
+         .page {
+         min-height: 640px;
+         padding: 24px;
+         border-radius: 22px;
+         }
+         main {
+         padding-top: 28px;
+         }
+         footer {
+         position: static;
+         margin-top: 42px;
+         }
+         }
+      </style>
+   </head>
+   <body>
+      <section class="page" aria-label="Profile links">
+         <header class="topbar">
+            <div>{{ initials .Site.Title }}</div>
+         </header>
+         <main>
+            {{ if .Site.Avatar.Name }}
+            <img
+               class="avatar"
+               src="/static/{{ .Site.Avatar.Name }}"
+               alt="Profile photo"
+               />
+            {{ else }}
+            <img class="avatar" src="{{ .Site.Avatar.Url }}" alt="Profile photo" />
+            {{ end }}
+            <h1>{{ .Site.Title }}</h1>
+            <p class="role">{{ .Site.SubTitle }}</p>
+            <p class="bio">{{ .Site.Description }}</p>
+            <nav class="links" aria-label="Work links">
+               {{ range .Links }}
+               <a
+                  class="link-card"
+                  href="{{ .Url }}"
+                  target="_blank"
+                  rel="noreferrer"
+                  >
+                  <div class="icon">{{ .Icon }}</div>
+                  <div>
+                     <strong>{{ .Name }}</strong><span>{{ .Description }}</span>
+                  </div>
+                  <div class="arrow">›</div>
+               </a>
+               {{ end }}
+            </nav>
+         </main>
+      </section>
+      <footer>
+         <div>© {{ year }} {{ .Site.Title }}</div>
+      </footer>
+   </body>
+</html>
