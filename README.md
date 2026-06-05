@@ -134,16 +134,22 @@ theme:
   name: dark.html
 ```
 
+![Dark](images/dark.png)
+
 ```yaml
 # Light Theme
 theme:
   name: light.html
 ```
 
+![Dark](images/light.png)
+
 ```yaml
 # Terminal Theme
 theme:
   name: terminal.html
 ```
+
+![Dark](images/terminal.png)
 
 > **Default:** `dark.html`
